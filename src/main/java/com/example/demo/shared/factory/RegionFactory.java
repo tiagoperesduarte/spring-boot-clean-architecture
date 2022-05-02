@@ -1,20 +1,23 @@
-package com.example.demo.infrastructure.storage.repository.converter;
+package com.example.demo.shared.factory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
-
+import com.example.demo.application.usecase.dto.input.CreateRegionInput;
 import com.example.demo.domain.entity.PaymentMethod;
 import com.example.demo.domain.entity.Region;
 import com.example.demo.infrastructure.storage.document.RegionDocument;
-import com.example.demo.utils.CollectionUtils;
+import com.example.demo.shared.utils.CollectionUtils;
 
-@Component
-public class RegionDocumentToRegionConverter implements Converter<RegionDocument, Region> {
-    @Override
-    public Region convert(RegionDocument document) {
+public class RegionFactory {
+    public static Region of(CreateRegionInput input) {
+        return Region.builder()
+                     .name(input.getName())
+                     .type(input.getType())
+                     .build();
+    }
+
+    public static Region of(RegionDocument document) {
         List<PaymentMethod> paymentMethods = new ArrayList<>();
 
         if (CollectionUtils.isNotEmpty(document.getPaymentMethods())) {
@@ -24,6 +27,7 @@ public class RegionDocumentToRegionConverter implements Converter<RegionDocument
         return Region.builder()
                      .id(document.getId())
                      .name(document.getName())
+                     .type(document.getType())
                      .paymentMethods(paymentMethods)
                      .build();
     }

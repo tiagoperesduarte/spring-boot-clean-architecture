@@ -1,4 +1,4 @@
-package com.example.demo.utils;
+package com.example.demo.shared.utils;
 
 import java.util.Collection;
 

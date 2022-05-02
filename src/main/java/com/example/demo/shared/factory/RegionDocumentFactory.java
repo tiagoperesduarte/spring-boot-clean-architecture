@@ -1,15 +1,10 @@
-package com.example.demo.infrastructure.storage.repository.converter;
-
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+package com.example.demo.shared.factory;
 
 import com.example.demo.domain.entity.Region;
 import com.example.demo.infrastructure.storage.document.RegionDocument;
 
-@Component
-public class RegionToRegionDocumentConverter implements Converter<Region, RegionDocument> {
-    @Override
-    public RegionDocument convert(Region region) {
+public class RegionDocumentFactory {
+    public static RegionDocument of(Region region) {
         String id = null;
 
         if (region.getId() != null) {
@@ -19,6 +14,7 @@ public class RegionToRegionDocumentConverter implements Converter<Region, Region
         return RegionDocument.builder()
                              .id(id)
                              .name(region.getName())
+                             .type(region.getType())
                              .paymentMethods(region.getPaymentMethods())
                              .build();
     }

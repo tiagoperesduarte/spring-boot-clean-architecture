@@ -1,18 +1,14 @@
-package com.example.demo.infrastructure.api.converter;
-
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+package com.example.demo.shared.factory;
 
 import com.example.demo.domain.entity.Region;
 import com.example.demo.infrastructure.api.dto.response.RegionResponse;
 
-@Component
-public class RegionToRegionResponseConverter implements Converter<Region, RegionResponse> {
-    @Override
-    public RegionResponse convert(Region region) {
+public class RegionResponseFactory {
+    public static RegionResponse of(Region region) {
         return RegionResponse.builder()
                              .id(region.getId())
                              .name(region.getName())
+                             .type(region.getType())
                              .paymentMethods(region.getPaymentMethods())
                              .build();
     }
