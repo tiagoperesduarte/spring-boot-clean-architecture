@@ -7,10 +7,10 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class Region {
+public class Area {
     private String id;
     private String name;
-    private RegionType type;
+    private AreaType type;
     private List<PaymentMethod> paymentMethods;
 
     public void addPaymentMethod(PaymentMethod paymentMethod) {

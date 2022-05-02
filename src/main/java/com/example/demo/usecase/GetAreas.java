@@ -4,18 +4,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.entity.Region;
-import com.example.demo.domain.repository.RegionRepository;
+import com.example.demo.domain.entity.Area;
+import com.example.demo.domain.repository.AreaRepository;
 
 @Service
-public class GetRegions {
-    private final RegionRepository repository;
+public class GetAreas {
+    private final AreaRepository repository;
 
-    public GetRegions(RegionRepository repository) {
+    public GetAreas(AreaRepository repository) {
         this.repository = repository;
     }
 
-    public Page<Region> execute(Pageable pageable) {
+    public Page<Area> execute(Pageable pageable) {
         return repository.findAll(pageable);
     }
 }

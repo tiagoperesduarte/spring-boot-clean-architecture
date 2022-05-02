@@ -7,8 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UpdateRegionPaymentMethodRequest {
-    private String regionId;
+public class UpdateAreaPaymentMethodRequest {
+    private String areaId;
     private PaymentMethodType type;
     private boolean status;
     private String reason;

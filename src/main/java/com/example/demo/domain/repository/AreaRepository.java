@@ -5,14 +5,14 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.example.demo.domain.entity.Region;
+import com.example.demo.domain.entity.Area;
 
-public interface RegionRepository {
-    Page<Region> findAll(Pageable pageable);
+public interface AreaRepository {
+    Page<Area> findAll(Pageable pageable);
 
-    Optional<Region> findById(String id);
+    Optional<Area> findById(String id);
 
-    Region save(Region region);
+    Area save(Area area);
 
     void deleteById(String id);
 }

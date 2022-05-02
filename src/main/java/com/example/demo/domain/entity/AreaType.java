@@ -1,6 +1,6 @@
 package com.example.demo.domain.entity;
 
-public enum RegionType {
+public enum AreaType {
     REGION,
     SUB_REGION;
 }

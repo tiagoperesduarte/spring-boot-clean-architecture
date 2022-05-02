@@ -7,8 +7,8 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class UpdateRegionPaymentMethodInput {
-    private String regionId;
+public class UpdateAreaPaymentMethodInput {
+    private String areaId;
     private PaymentMethod paymentMethod;
     private String reason;
 }
