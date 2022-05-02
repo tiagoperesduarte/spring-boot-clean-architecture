@@ -1,11 +1,11 @@
-package com.example.demo.application.usecase;
+package com.example.demo.usecase;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.application.usecase.dto.input.UpdateRegionPaymentMethodInput;
 import com.example.demo.domain.entity.Region;
 import com.example.demo.domain.exception.RegionNotFoundException;
 import com.example.demo.domain.repository.RegionRepository;
+import com.example.demo.usecase.dto.input.UpdateRegionPaymentMethodInput;
 
 @Service
 public class UpdateRegionPaymentMethod {

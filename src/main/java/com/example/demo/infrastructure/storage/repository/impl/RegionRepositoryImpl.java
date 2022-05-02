@@ -6,11 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.common.factory.RegionDocumentFactory;
+import com.example.demo.common.factory.RegionFactory;
 import com.example.demo.domain.entity.Region;
 import com.example.demo.domain.repository.RegionRepository;
 import com.example.demo.infrastructure.storage.repository.RegionMongoRepository;
-import com.example.demo.shared.factory.RegionDocumentFactory;
-import com.example.demo.shared.factory.RegionFactory;
 
 @Repository
 public class RegionRepositoryImpl implements RegionRepository {

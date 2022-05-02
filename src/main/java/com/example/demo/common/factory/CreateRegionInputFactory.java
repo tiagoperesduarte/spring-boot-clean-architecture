@@ -1,7 +1,7 @@
-package com.example.demo.shared.factory;
+package com.example.demo.common.factory;
 
-import com.example.demo.application.usecase.dto.input.CreateRegionInput;
 import com.example.demo.infrastructure.api.dto.request.CreateRegionRequest;
+import com.example.demo.usecase.dto.input.CreateRegionInput;
 
 public class CreateRegionInputFactory {
     public static CreateRegionInput of(CreateRegionRequest request) {

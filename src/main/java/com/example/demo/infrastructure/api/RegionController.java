@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.application.usecase.CreateRegion;
-import com.example.demo.application.usecase.GetRegions;
+import com.example.demo.common.factory.CreateRegionInputFactory;
+import com.example.demo.common.factory.RegionResponseFactory;
 import com.example.demo.infrastructure.api.dto.request.CreateRegionRequest;
 import com.example.demo.infrastructure.api.dto.response.RegionResponse;
-import com.example.demo.shared.factory.CreateRegionInputFactory;
-import com.example.demo.shared.factory.RegionResponseFactory;
+import com.example.demo.usecase.CreateRegion;
+import com.example.demo.usecase.GetRegions;
 
 @RestController
 @RequestMapping(value = "/api/v1")

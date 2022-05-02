@@ -1,4 +1,4 @@
-package com.example.demo.shared.factory;
+package com.example.demo.common.factory;
 
 import com.example.demo.domain.entity.Region;
 import com.example.demo.infrastructure.storage.document.RegionDocument;

@@ -1,4 +1,4 @@
-package com.example.demo.shared.factory;
+package com.example.demo.common.factory;
 
 import com.example.demo.domain.entity.PaymentMethod;
 import com.example.demo.infrastructure.api.dto.request.UpdateRegionPaymentMethodRequest;

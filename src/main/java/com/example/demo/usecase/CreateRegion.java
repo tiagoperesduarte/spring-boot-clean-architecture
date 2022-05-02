@@ -1,11 +1,11 @@
-package com.example.demo.application.usecase;
+package com.example.demo.usecase;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.application.usecase.dto.input.CreateRegionInput;
+import com.example.demo.common.factory.RegionFactory;
 import com.example.demo.domain.entity.Region;
 import com.example.demo.domain.repository.RegionRepository;
-import com.example.demo.shared.factory.RegionFactory;
+import com.example.demo.usecase.dto.input.CreateRegionInput;
 
 @Service
 public class CreateRegion {

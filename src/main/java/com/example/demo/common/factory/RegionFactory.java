@@ -1,13 +1,13 @@
-package com.example.demo.shared.factory;
+package com.example.demo.common.factory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.demo.application.usecase.dto.input.CreateRegionInput;
+import com.example.demo.common.utils.CollectionUtils;
 import com.example.demo.domain.entity.PaymentMethod;
 import com.example.demo.domain.entity.Region;
 import com.example.demo.infrastructure.storage.document.RegionDocument;
-import com.example.demo.shared.utils.CollectionUtils;
+import com.example.demo.usecase.dto.input.CreateRegionInput;
 
 public class RegionFactory {
     public static Region of(CreateRegionInput input) {
