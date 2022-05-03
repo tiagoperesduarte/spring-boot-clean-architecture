@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.common.factory.AreaResponseFactory;
 import com.example.demo.common.factory.UpdateAreaPaymentMethodInputFactory;
 import com.example.demo.domain.entity.PaymentMethodType;
+import com.example.demo.domain.usecase.UpdateAreaPaymentMethod;
 import com.example.demo.infrastructure.api.dto.request.UpdateAreaPaymentMethodRequest;
 import com.example.demo.infrastructure.api.dto.response.AreaResponse;
-import com.example.demo.usecase.UpdateAreaPaymentMethod;
 
 @RestController
 @RequestMapping(value = "/api/v1")

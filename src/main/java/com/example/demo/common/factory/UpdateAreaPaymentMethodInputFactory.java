@@ -1,7 +1,7 @@
 package com.example.demo.common.factory;
 
+import com.example.demo.domain.usecase.dto.input.UpdateAreaPaymentMethodInput;
 import com.example.demo.infrastructure.api.dto.request.UpdateAreaPaymentMethodRequest;
-import com.example.demo.usecase.dto.input.UpdateAreaPaymentMethodInput;
 
 public class UpdateAreaPaymentMethodInputFactory {
     public static UpdateAreaPaymentMethodInput of(UpdateAreaPaymentMethodRequest request) {

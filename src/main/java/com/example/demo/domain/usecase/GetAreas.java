@@ -1,4 +1,4 @@
-package com.example.demo.usecase;
+package com.example.demo.domain.usecase;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

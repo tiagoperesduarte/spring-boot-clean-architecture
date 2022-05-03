@@ -1,11 +1,11 @@
-package com.example.demo.usecase;
+package com.example.demo.domain.usecase;
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.common.factory.AreaFactory;
 import com.example.demo.domain.entity.Area;
 import com.example.demo.domain.repository.AreaRepository;
-import com.example.demo.usecase.dto.input.CreateAreaInput;
+import com.example.demo.domain.usecase.dto.input.CreateAreaInput;
 
 @Service
 public class CreateArea {

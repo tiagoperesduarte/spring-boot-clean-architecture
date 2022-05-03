@@ -6,8 +6,8 @@ import java.util.List;
 import com.example.demo.common.utils.CollectionUtils;
 import com.example.demo.domain.entity.Area;
 import com.example.demo.domain.entity.PaymentMethod;
+import com.example.demo.domain.usecase.dto.input.CreateAreaInput;
 import com.example.demo.infrastructure.storage.document.AreaDocument;
-import com.example.demo.usecase.dto.input.CreateAreaInput;
 
 public class AreaFactory {
     public static Area of(CreateAreaInput input) {

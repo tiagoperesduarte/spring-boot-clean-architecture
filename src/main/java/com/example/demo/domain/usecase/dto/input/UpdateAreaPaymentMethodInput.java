@@ -1,4 +1,4 @@
-package com.example.demo.usecase.dto.input;
+package com.example.demo.domain.usecase.dto.input;
 
 import com.example.demo.domain.entity.PaymentMethod;
 
