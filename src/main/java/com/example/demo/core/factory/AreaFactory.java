@@ -1,9 +1,9 @@
-package com.example.demo.common.factory;
+package com.example.demo.core.factory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.demo.common.utils.CollectionUtils;
+import com.example.demo.core.utils.CollectionUtils;
 import com.example.demo.domain.entity.Area;
 import com.example.demo.domain.entity.PaymentMethod;
 import com.example.demo.domain.usecase.dto.input.CreateAreaInput;

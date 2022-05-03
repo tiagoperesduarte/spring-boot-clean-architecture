@@ -1,4 +1,4 @@
-package com.example.demo.common.factory;
+package com.example.demo.core.factory;
 
 import com.example.demo.domain.usecase.dto.input.CreateAreaInput;
 import com.example.demo.infrastructure.api.dto.request.CreateAreaRequest;

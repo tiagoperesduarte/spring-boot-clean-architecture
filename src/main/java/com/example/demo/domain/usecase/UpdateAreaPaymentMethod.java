@@ -9,15 +9,15 @@ import com.example.demo.domain.usecase.dto.input.UpdateAreaPaymentMethodInput;
 
 @Service
 public class UpdateAreaPaymentMethod {
-    private final AreaRepository repository;
+    private final AreaRepository areaRepository;
 
-    public UpdateAreaPaymentMethod(AreaRepository repository) {
-        this.repository = repository;
+    public UpdateAreaPaymentMethod(AreaRepository areaRepository) {
+        this.areaRepository = areaRepository;
     }
 
     public Area execute(UpdateAreaPaymentMethodInput input) {
-        var area = repository.findById(input.getAreaId())
-                             .orElseThrow(() -> new AreaNotFoundException("Area not found with id " + input.getAreaId()));
+        var area = areaRepository.findById(input.getAreaId())
+                                 .orElseThrow(() -> new AreaNotFoundException("Area not found with id " + input.getAreaId()));
 
         area.getPaymentMethods()
             .stream()
@@ -28,6 +28,6 @@ public class UpdateAreaPaymentMethod {
                     () -> area.addPaymentMethod(input.getPaymentMethod())
             );
 
-        return repository.save(area);
+        return areaRepository.save(area);
     }
 }

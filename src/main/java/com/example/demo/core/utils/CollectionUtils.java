@@ -1,4 +1,4 @@
-package com.example.demo.common.utils;
+package com.example.demo.core.utils;
 
 import java.util.Collection;
 

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.common.factory.AreaResponseFactory;
-import com.example.demo.common.factory.UpdateAreaPaymentMethodInputFactory;
+import com.example.demo.core.factory.AreaResponseFactory;
+import com.example.demo.core.factory.UpdateAreaPaymentMethodInputFactory;
 import com.example.demo.domain.entity.PaymentMethodType;
 import com.example.demo.domain.usecase.UpdateAreaPaymentMethod;
 import com.example.demo.infrastructure.api.dto.request.UpdateAreaPaymentMethodRequest;

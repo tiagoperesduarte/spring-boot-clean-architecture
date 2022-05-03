@@ -6,8 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.common.factory.AreaDocumentFactory;
-import com.example.demo.common.factory.AreaFactory;
+import com.example.demo.core.factory.AreaDocumentFactory;
+import com.example.demo.core.factory.AreaFactory;
 import com.example.demo.domain.entity.Area;
 import com.example.demo.domain.repository.AreaRepository;
 import com.example.demo.infrastructure.storage.repository.AreaMongoRepository;

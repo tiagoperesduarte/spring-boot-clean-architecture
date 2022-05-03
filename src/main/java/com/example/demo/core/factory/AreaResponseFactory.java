@@ -1,4 +1,4 @@
-package com.example.demo.common.factory;
+package com.example.demo.core.factory;
 
 import com.example.demo.domain.entity.Area;
 import com.example.demo.infrastructure.api.dto.response.AreaResponse;

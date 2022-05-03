@@ -9,13 +9,13 @@ import com.example.demo.domain.repository.AreaRepository;
 
 @Service
 public class GetAreas {
-    private final AreaRepository repository;
+    private final AreaRepository areaRepository;
 
-    public GetAreas(AreaRepository repository) {
-        this.repository = repository;
+    public GetAreas(AreaRepository areaRepository) {
+        this.areaRepository = areaRepository;
     }
 
     public Page<Area> execute(Pageable pageable) {
-        return repository.findAll(pageable);
+        return areaRepository.findAll(pageable);
     }
 }
