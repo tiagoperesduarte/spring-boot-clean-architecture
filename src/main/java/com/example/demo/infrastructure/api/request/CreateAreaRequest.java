@@ -16,9 +16,6 @@ public class CreateAreaRequest {
     private AreaType type;
 
     public CreateAreaInput toInput() {
-        return new CreateAreaInput(
-                name,
-                type
-        );
+        return new CreateAreaInput(name, type);
     }
 }

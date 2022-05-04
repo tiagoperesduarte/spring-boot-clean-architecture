@@ -2,16 +2,17 @@ package com.example.demo.domain.entity;
 
 import java.util.Objects;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@Builder
 public class PaymentMethod {
     private PaymentMethodType type;
     private boolean status;
+    private PaymentMethodReason reason;
 
     @Override
     public boolean equals(Object o) {

@@ -10,5 +10,4 @@ import lombok.Getter;
 public class UpdateAreaPaymentMethodInput {
     private final String areaId;
     private final PaymentMethod paymentMethod;
-    private final String reason;
 }
