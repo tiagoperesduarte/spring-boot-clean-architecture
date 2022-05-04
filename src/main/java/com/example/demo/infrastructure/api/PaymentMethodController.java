@@ -8,20 +8,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.core.factory.AreaResponseFactory;
-import com.example.demo.core.factory.UpdateAreaPaymentMethodInputFactory;
 import com.example.demo.domain.entity.PaymentMethodType;
-import com.example.demo.domain.usecase.UpdateAreaPaymentMethod;
-import com.example.demo.infrastructure.api.dto.request.UpdateAreaPaymentMethodRequest;
-import com.example.demo.infrastructure.api.dto.response.AreaResponse;
+import com.example.demo.domain.usecase.UpdateAreaPaymentMethodUseCase;
+import com.example.demo.infrastructure.api.request.UpdateAreaPaymentMethodRequest;
+import com.example.demo.infrastructure.api.response.AreaResponse;
 
 @RestController
 @RequestMapping(value = "/api/v1")
 public class PaymentMethodController {
-    private final UpdateAreaPaymentMethod updateAreaPaymentMethod;
+    private final UpdateAreaPaymentMethodUseCase updateAreaPaymentMethodUseCase;
 
-    public PaymentMethodController(UpdateAreaPaymentMethod updateAreaPaymentMethod) {
-        this.updateAreaPaymentMethod = updateAreaPaymentMethod;
+    public PaymentMethodController(UpdateAreaPaymentMethodUseCase updateAreaPaymentMethodUseCase) {
+        this.updateAreaPaymentMethodUseCase = updateAreaPaymentMethodUseCase;
     }
 
     @PutMapping(value = "/areas/{areaId}/payment-methods/{paymentMethodType}")
@@ -33,7 +31,7 @@ public class PaymentMethodController {
         request.setAreaId(areaId);
         request.setType(paymentMethodType);
 
-        var area = updateAreaPaymentMethod.execute(UpdateAreaPaymentMethodInputFactory.of(request));
-        return AreaResponseFactory.of(area);
+        var area = updateAreaPaymentMethodUseCase.execute(request.toInput());
+        return AreaResponse.of(area);
     }
 }

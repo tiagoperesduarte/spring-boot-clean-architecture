@@ -2,13 +2,13 @@ package com.example.demo.domain.entity;
 
 import java.util.Objects;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
+@AllArgsConstructor
 public class PaymentMethod {
     private PaymentMethodType type;
     private boolean status;

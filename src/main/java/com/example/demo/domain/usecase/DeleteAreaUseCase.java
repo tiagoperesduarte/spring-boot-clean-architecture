@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 import com.example.demo.domain.repository.AreaRepository;
 
 @Service
-public class DeleteArea {
+public class DeleteAreaUseCase {
     private final AreaRepository areaRepository;
 
-    public DeleteArea(AreaRepository areaRepository) {
+    public DeleteAreaUseCase(AreaRepository areaRepository) {
         this.areaRepository = areaRepository;
     }
 

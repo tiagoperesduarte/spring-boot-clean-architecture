@@ -2,16 +2,14 @@ package com.example.demo.infrastructure.storage.repository.impl;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.core.factory.AreaDocumentFactory;
-import com.example.demo.core.factory.AreaFactory;
-import com.example.demo.core.factory.PageRequestFactory;
-import com.example.demo.core.factory.SimplePageFactory;
 import com.example.demo.domain.entity.Area;
 import com.example.demo.domain.entity.SimplePage;
 import com.example.demo.domain.entity.SimplePageRequest;
 import com.example.demo.domain.repository.AreaRepository;
+import com.example.demo.infrastructure.storage.document.AreaDocument;
 import com.example.demo.infrastructure.storage.repository.AreaMongoRepository;
 
 @Repository
@@ -24,22 +22,23 @@ public class AreaRepositoryImpl implements AreaRepository {
 
     @Override
     public SimplePage<Area> findAll(SimplePageRequest simplePageRequest) {
-        var page = repository.findAll(PageRequestFactory.of(simplePageRequest))
-                             .map(AreaFactory::of);
+        var pageRequest = PageRequest.of(simplePageRequest.getPage(), simplePageRequest.getSize());
+        var page = repository.findAll(pageRequest)
+                             .map(AreaDocument::toEntity);
 
-        return SimplePageFactory.of(page);
+        return new SimplePage<>(page.getContent(), page.getTotalElements());
     }
 
     @Override
     public Optional<Area> findById(String id) {
         return repository.findById(id)
-                         .map(AreaFactory::of);
+                         .map(AreaDocument::toEntity);
     }
 
     @Override
     public Area save(Area area) {
-        var savedAreaDocument = repository.save(AreaDocumentFactory.of(area));
-        return AreaFactory.of(savedAreaDocument);
+        var savedAreaDocument = repository.save(AreaDocument.of(area));
+        return savedAreaDocument.toEntity();
     }
 
     @Override

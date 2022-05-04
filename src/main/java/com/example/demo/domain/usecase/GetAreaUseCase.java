@@ -7,10 +7,10 @@ import com.example.demo.domain.exception.AreaNotFoundException;
 import com.example.demo.domain.repository.AreaRepository;
 
 @Service
-public class GetArea {
+public class GetAreaUseCase {
     private final AreaRepository areaRepository;
 
-    public GetArea(AreaRepository areaRepository) {
+    public GetAreaUseCase(AreaRepository areaRepository) {
         this.areaRepository = areaRepository;
     }
 

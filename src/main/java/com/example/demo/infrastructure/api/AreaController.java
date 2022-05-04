@@ -3,6 +3,7 @@ package com.example.demo.infrastructure.api;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,74 +16,59 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.core.factory.AreaResponseFactory;
-import com.example.demo.core.factory.CreateAreaInputFactory;
-import com.example.demo.core.factory.GetAreasInputFactory;
-import com.example.demo.core.factory.PageFactory;
-import com.example.demo.domain.usecase.CreateArea;
-import com.example.demo.domain.usecase.DeleteArea;
-import com.example.demo.domain.usecase.GetArea;
-import com.example.demo.domain.usecase.GetAreas;
-import com.example.demo.infrastructure.api.dto.request.CreateAreaRequest;
-import com.example.demo.infrastructure.api.dto.response.AreaResponse;
+import com.example.demo.domain.usecase.CreateAreaUseCase;
+import com.example.demo.domain.usecase.DeleteAreaUseCase;
+import com.example.demo.domain.usecase.GetAreaUseCase;
+import com.example.demo.domain.usecase.GetAreasUseCase;
+import com.example.demo.domain.usecase.input.GetAreasInput;
+import com.example.demo.infrastructure.api.request.CreateAreaRequest;
+import com.example.demo.infrastructure.api.response.AreaResponse;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1")
 public class AreaController {
-    private final GetAreas getAreas;
-    private final GetArea getArea;
-    private final CreateArea createArea;
-    private final DeleteArea deleteArea;
+    private final GetAreasUseCase getAreasUseCase;
+    private final GetAreaUseCase getAreaUseCase;
+    private final CreateAreaUseCase createAreaUseCase;
+    private final DeleteAreaUseCase deleteAreaUseCase;
 
     public AreaController(
-            GetAreas getAreas,
-            GetArea getArea,
-            CreateArea createArea,
-            DeleteArea deleteArea
+            GetAreasUseCase getAreasUseCase,
+            GetAreaUseCase getAreaUseCase,
+            CreateAreaUseCase createAreaUseCase,
+            DeleteAreaUseCase deleteAreaUseCase
     ) {
-        this.getAreas = getAreas;
-        this.getArea = getArea;
-        this.createArea = createArea;
-        this.deleteArea = deleteArea;
+        this.getAreasUseCase = getAreasUseCase;
+        this.getAreaUseCase = getAreaUseCase;
+        this.createAreaUseCase = createAreaUseCase;
+        this.deleteAreaUseCase = deleteAreaUseCase;
     }
 
     @GetMapping(value = "/areas")
     public Page<AreaResponse> getAreas(Pageable pageable) {
-        log.debug("Request to find all areas by query (query={})", pageable);
+        var input = new GetAreasInput(pageable.getPageNumber(), pageable.getPageSize());
+        var simplePage = getAreasUseCase.execute(input)
+                                        .map(AreaResponse::of);
 
-        var simplePage = getAreas.execute(GetAreasInputFactory.of(pageable))
-                                 .map(AreaResponseFactory::of);
-
-        return PageFactory.of(simplePage, pageable);
+        return new PageImpl<>(simplePage.getContent(), pageable, simplePage.getTotalElements());
     }
 
     @GetMapping(value = "/areas/{areaId}")
     public AreaResponse getArea(@PathVariable String areaId) {
-        log.debug("Request to find area by id (id={})", areaId);
-
-        var area = getArea.execute(areaId);
-        return AreaResponseFactory.of(area);
+        var area = getAreaUseCase.execute(areaId);
+        return AreaResponse.of(area);
     }
 
     @PostMapping(value = "/areas")
     @ResponseStatus(HttpStatus.CREATED)
-    public AreaResponse createArea(
-            @Valid @RequestBody CreateAreaRequest request
-    ) {
-        log.debug("Request to create new area with data (data={})", request);
-
-        var area = createArea.execute(CreateAreaInputFactory.of(request));
-        return AreaResponseFactory.of(area);
+    public AreaResponse createArea(@Valid @RequestBody CreateAreaRequest request) {
+        var area = createAreaUseCase.execute(request.toInput());
+        return AreaResponse.of(area);
     }
 
     @DeleteMapping(value = "/areas/{areaId}")
     public ResponseEntity<?> deleteArea(@PathVariable String areaId) {
-        log.debug("Request to delete area by id (id={})", areaId);
-
-        deleteArea.execute(areaId);
+        deleteAreaUseCase.execute(areaId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
