@@ -7,7 +7,7 @@ public class PaymentMethodFactory {
     public static PaymentMethod of(UpdateAreaPaymentMethodRequest request) {
         return PaymentMethod.builder()
                             .type(request.getType())
-                            .status(request.isStatus())
+                            .status(request.getStatus())
                             .build();
     }
 }

@@ -2,13 +2,12 @@ package com.example.demo.domain.repository;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import com.example.demo.domain.entity.Area;
+import com.example.demo.domain.entity.SimplePage;
+import com.example.demo.domain.entity.SimplePageRequest;
 
 public interface AreaRepository {
-    Page<Area> findAll(Pageable pageable);
+    SimplePage<Area> findAll(SimplePageRequest page);
 
     Optional<Area> findById(String id);
 

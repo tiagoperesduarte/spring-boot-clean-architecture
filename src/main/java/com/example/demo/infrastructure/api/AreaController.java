@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.core.factory.AreaResponseFactory;
 import com.example.demo.core.factory.CreateAreaInputFactory;
+import com.example.demo.core.factory.GetAreasInputFactory;
+import com.example.demo.core.factory.PageFactory;
 import com.example.demo.domain.usecase.CreateArea;
 import com.example.demo.domain.usecase.DeleteArea;
 import com.example.demo.domain.usecase.GetArea;
@@ -51,8 +53,10 @@ public class AreaController {
     public Page<AreaResponse> getAreas(Pageable pageable) {
         log.debug("Request to find all areas by query (query={})", pageable);
 
-        return getAreas.execute(pageable)
-                       .map(AreaResponseFactory::of);
+        var simplePage = getAreas.execute(GetAreasInputFactory.of(pageable))
+                                 .map(AreaResponseFactory::of);
+
+        return PageFactory.of(simplePage, pageable);
     }
 
     @GetMapping(value = "/areas/{areaId}")
