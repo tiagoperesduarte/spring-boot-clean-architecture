@@ -19,15 +19,7 @@ public class UpdateAreaPaymentMethodUseCase {
         var area = areaRepository.findById(input.getAreaId())
                                  .orElseThrow(() -> new AreaNotFoundException("Area not found with id " + input.getAreaId()));
 
-        area.getPaymentMethods()
-            .stream()
-            .filter(paymentMethod -> paymentMethod.equals(input.getPaymentMethod()))
-            .findFirst()
-            .ifPresentOrElse(
-                    paymentMethod -> paymentMethod.setStatus(input.getPaymentMethod().isStatus()),
-                    () -> area.addPaymentMethod(input.getPaymentMethod())
-            );
-
+        area.addOrUpdatePaymentMethod(input.getPaymentMethod());
         return areaRepository.save(area);
     }
 }

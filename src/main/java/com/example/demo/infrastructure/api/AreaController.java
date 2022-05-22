@@ -24,6 +24,9 @@ import com.example.demo.domain.usecase.input.GetAreasInput;
 import com.example.demo.infrastructure.api.request.CreateAreaRequest;
 import com.example.demo.infrastructure.api.response.AreaResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1")
 public class AreaController {
@@ -46,6 +49,8 @@ public class AreaController {
 
     @GetMapping(value = "/areas")
     public Page<AreaResponse> getAreas(Pageable pageable) {
+        log.debug("Request to find all areas by query (query={})", pageable);
+
         var input = new GetAreasInput(pageable.getPageNumber(), pageable.getPageSize());
         var simplePage = getAreasUseCase.execute(input)
                                         .map(AreaResponse::of);
@@ -55,6 +60,8 @@ public class AreaController {
 
     @GetMapping(value = "/areas/{areaId}")
     public AreaResponse getArea(@PathVariable String areaId) {
+        log.debug("Request to find area by id (id={})", areaId);
+
         var area = getAreaUseCase.execute(areaId);
         return AreaResponse.of(area);
     }
@@ -62,12 +69,16 @@ public class AreaController {
     @PostMapping(value = "/areas")
     @ResponseStatus(HttpStatus.CREATED)
     public AreaResponse createArea(@Valid @RequestBody CreateAreaRequest request) {
+        log.debug("Request to create new area with data (data={})", request);
+
         var area = createAreaUseCase.execute(request.toInput());
         return AreaResponse.of(area);
     }
 
     @DeleteMapping(value = "/areas/{areaId}")
     public ResponseEntity<?> deleteArea(@PathVariable String areaId) {
+        log.debug("Request to delete area by id (id={})", areaId);
+
         deleteAreaUseCase.execute(areaId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

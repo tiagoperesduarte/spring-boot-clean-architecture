@@ -13,6 +13,9 @@ import com.example.demo.domain.usecase.UpdateAreaPaymentMethodUseCase;
 import com.example.demo.infrastructure.api.request.UpdateAreaPaymentMethodRequest;
 import com.example.demo.infrastructure.api.response.AreaResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1")
 public class PaymentMethodController {
@@ -30,6 +33,8 @@ public class PaymentMethodController {
     ) {
         request.setAreaId(areaId);
         request.setType(paymentMethodType);
+
+        log.debug("Request to update area payment method with data (data={})", request);
 
         var area = updateAreaPaymentMethodUseCase.execute(request.toInput());
         return AreaResponse.of(area);

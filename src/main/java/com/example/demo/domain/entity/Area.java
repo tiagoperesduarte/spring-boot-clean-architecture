@@ -3,6 +3,8 @@ package com.example.demo.domain.entity;
 import java.util.List;
 import java.util.Objects;
 
+import com.example.demo.domain.exception.InsufficientReasonException;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,8 +18,30 @@ public class Area {
     private AreaType type;
     private List<PaymentMethod> paymentMethods;
 
-    public void addPaymentMethod(PaymentMethod paymentMethod) {
+    public void addOrUpdatePaymentMethod(PaymentMethod newPaymentMethod) {
+        this.paymentMethods
+                .stream()
+                .filter(paymentMethod -> paymentMethod.equals(newPaymentMethod))
+                .findFirst()
+                .ifPresentOrElse(
+                        paymentMethod -> updatePaymentMethod(paymentMethod, newPaymentMethod),
+                        () -> addPaymentMethod(newPaymentMethod)
+                );
+    }
+
+    private void addPaymentMethod(PaymentMethod paymentMethod) {
         paymentMethods.add(paymentMethod);
+    }
+
+    private void updatePaymentMethod(PaymentMethod paymentMethod, PaymentMethod newPaymentMethod) {
+        if (paymentMethod.getReason().hasPriority(newPaymentMethod.getReason())) {
+            throw new InsufficientReasonException(
+                    String.format("Payment method %s cannot be updated, insufficient reason", paymentMethod.getType())
+            );
+        }
+
+        paymentMethod.setStatus(newPaymentMethod.isStatus());
+        paymentMethod.setReason(newPaymentMethod.getReason());
     }
 
     @Override
