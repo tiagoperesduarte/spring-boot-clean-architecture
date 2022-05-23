@@ -55,7 +55,7 @@ public class Area {
         }
 
         Area area = (Area) o;
-        return id.equals(area.id);
+        return Objects.equals(id, area.id);
     }
 
     @Override

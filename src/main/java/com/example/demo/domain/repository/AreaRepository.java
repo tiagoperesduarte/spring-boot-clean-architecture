@@ -7,7 +7,7 @@ import com.example.demo.domain.entity.SimplePage;
 import com.example.demo.domain.entity.SimplePageRequest;
 
 public interface AreaRepository {
-    SimplePage<Area> findAll(SimplePageRequest page);
+    SimplePage<Area> findAll(SimplePageRequest simplePageRequest);
 
     Optional<Area> findById(String id);
 
