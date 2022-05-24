@@ -3,6 +3,7 @@ package com.example.demo.infrastructure.storage.document;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -24,7 +25,7 @@ public class AreaDocument {
 
     private String name;
     private AreaType type;
-    private List<PaymentMethod> paymentMethods;
+    private List<PaymentMethodDocument> paymentMethods;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 
@@ -35,11 +36,20 @@ public class AreaDocument {
             id = area.getId();
         }
 
+        List<PaymentMethodDocument> paymentMethodDocuments = new ArrayList<>();
+
+        if (CollectionUtils.isNotEmpty(area.getPaymentMethods())) {
+            paymentMethodDocuments = area.getPaymentMethods()
+                                         .stream()
+                                         .map(PaymentMethodDocument::of)
+                                         .collect(Collectors.toList());
+        }
+
         return AreaDocument.builder()
                            .id(id)
                            .name(area.getName())
                            .type(area.getType())
-                           .paymentMethods(area.getPaymentMethods())
+                           .paymentMethods(paymentMethodDocuments)
                            .build();
     }
 
@@ -47,7 +57,10 @@ public class AreaDocument {
         List<PaymentMethod> paymentMethods = new ArrayList<>();
 
         if (CollectionUtils.isNotEmpty(this.paymentMethods)) {
-            paymentMethods = this.paymentMethods;
+            paymentMethods = this.paymentMethods
+                    .stream()
+                    .map(PaymentMethodDocument::toEntity)
+                    .collect(Collectors.toList());
         }
 
         return Area.builder()

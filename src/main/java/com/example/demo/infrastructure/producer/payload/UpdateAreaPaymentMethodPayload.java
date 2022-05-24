@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 
 @Data
-public class UpdateRestaurantPaymentMethodPayload implements Serializable {
-    private String restaurantId;
+public class UpdateAreaPaymentMethodPayload implements Serializable {
+    private String areaId;
     private PaymentMethodType type;
     private Boolean status;
     private PaymentMethodReason reason;

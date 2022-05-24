@@ -19,7 +19,8 @@ public class SimplePage<T> {
         return new SimplePage<>(
                 content.stream()
                        .map(mapper)
-                       .collect(Collectors.toList()),
+                       .collect(Collectors.toList())
+                ,
                 totalElements
         );
     }

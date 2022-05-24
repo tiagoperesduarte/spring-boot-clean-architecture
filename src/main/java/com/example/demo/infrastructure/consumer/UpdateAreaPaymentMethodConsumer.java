@@ -21,7 +21,7 @@ public class UpdateAreaPaymentMethodConsumer implements KafkaConsumer<UpdateArea
     }
 
     @KafkaListener(
-            topics = "${app.consumer.area-payment-method-update.topic}",
+            topics = "${app.microservice1.area-payment-method-update.topic}",
             containerFactory = "kafkaJsonListenerContainerFactory"
     )
     @Override
