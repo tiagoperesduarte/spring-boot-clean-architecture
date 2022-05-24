@@ -9,8 +9,10 @@ import com.example.demo.domain.usecase.input.UpdateAreaPaymentMethodInput;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class UpdateAreaPaymentMethodRequest {
     @Setter
     private String areaId;

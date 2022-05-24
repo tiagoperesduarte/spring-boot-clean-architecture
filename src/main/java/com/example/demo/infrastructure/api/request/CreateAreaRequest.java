@@ -6,8 +6,10 @@ import com.example.demo.domain.entity.AreaType;
 import com.example.demo.domain.usecase.input.CreateAreaInput;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class CreateAreaRequest {
     @NotNull
     private String name;

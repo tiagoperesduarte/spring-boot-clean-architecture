@@ -7,9 +7,11 @@ import com.example.demo.domain.entity.PaymentMethodReason;
 import com.example.demo.domain.entity.PaymentMethodType;
 import com.example.demo.domain.usecase.input.UpdateAreaPaymentMethodInput;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.ToString;
 
-@Data
+@Getter
+@ToString
 public class UpdateAreaPaymentMethodPayload implements Serializable {
     private String areaId;
     private PaymentMethodType type;

@@ -26,7 +26,7 @@ public class UpdateAreaPaymentMethodConsumer implements KafkaConsumer<UpdateArea
     )
     @Override
     public void consume(@Payload UpdateAreaPaymentMethodPayload payload, Acknowledgment ack) {
-        log.debug("Event to update area payment method with data (data={})", payload);
+        log.debug("Consuming event to update area payment method with data (data={})", payload);
 
         try {
             updateAreaPaymentMethodUseCase.execute(payload.toInput());
