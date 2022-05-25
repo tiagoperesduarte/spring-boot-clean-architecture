@@ -14,8 +14,8 @@
     <artifactId>apmc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>Area Payment Method Control</name>
-    <description>Demo project for Spring Boot</description>
+    <name>apmc</name>
+    <description>Area Payment Method Control</description>
 
     <properties>
         <java.version>17</java.version>

@@ -1,4 +1,4 @@
-package com.delivery.apmc.infrastructure.storage.repository;
+package com.delivery.apmc.infrastructure.repository;
 
 import java.util.Optional;
 
@@ -10,6 +10,7 @@ import com.delivery.apmc.domain.entity.SimplePage;
 import com.delivery.apmc.domain.entity.SimplePageRequest;
 import com.delivery.apmc.domain.repository.AreaRepository;
 import com.delivery.apmc.infrastructure.storage.document.AreaDocument;
+import com.delivery.apmc.infrastructure.storage.repository.AreaMongoRepository;
 
 @Repository
 public class AreaRepositoryImpl implements AreaRepository {

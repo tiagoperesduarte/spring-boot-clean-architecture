@@ -1,4 +1,4 @@
-package com.delivery.apmc.infrastructure.consumer;
+package com.delivery.apmc.infrastructure.event.consumer;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.delivery.apmc.domain.exception.DomainException;
 import com.delivery.apmc.domain.usecase.UpdateAreaPaymentMethodUseCase;
-import com.delivery.apmc.infrastructure.consumer.payload.UpdateAreaPaymentMethodPayload;
+import com.delivery.apmc.infrastructure.event.consumer.payload.UpdateAreaPaymentMethodPayload;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +21,7 @@ public class UpdateAreaPaymentMethodConsumer implements KafkaConsumer<UpdateArea
     }
 
     @KafkaListener(
-            topics = "${app.microservice1.area-payment-method-update.topic}",
+            topics = "${app.apmc.area-payment-method-update.topic}",
             containerFactory = "kafkaJsonListenerContainerFactory"
     )
     @Override

@@ -1,4 +1,4 @@
-package com.delivery.apmc.infrastructure.producer.payload;
+package com.delivery.apmc.infrastructure.event.producer.payload;
 
 import java.io.Serializable;
 
