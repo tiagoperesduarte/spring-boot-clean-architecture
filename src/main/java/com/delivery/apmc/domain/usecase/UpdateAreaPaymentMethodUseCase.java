@@ -5,20 +5,20 @@ import org.springframework.stereotype.Service;
 import com.delivery.apmc.domain.entity.Area;
 import com.delivery.apmc.domain.exception.AreaNotFoundException;
 import com.delivery.apmc.domain.repository.AreaRepository;
-import com.delivery.apmc.domain.repository.PaymentMethodRepository;
+import com.delivery.apmc.domain.repository.RestaurantPaymentMethodRepository;
 import com.delivery.apmc.domain.usecase.input.UpdateAreaPaymentMethodInput;
 
 @Service
 public class UpdateAreaPaymentMethodUseCase {
     private final AreaRepository areaRepository;
-    private final PaymentMethodRepository paymentMethodRepository;
+    private final RestaurantPaymentMethodRepository restaurantPaymentMethodRepository;
 
     public UpdateAreaPaymentMethodUseCase(
             AreaRepository areaRepository,
-            PaymentMethodRepository paymentMethodRepository
+            RestaurantPaymentMethodRepository restaurantPaymentMethodRepository
     ) {
         this.areaRepository = areaRepository;
-        this.paymentMethodRepository = paymentMethodRepository;
+        this.restaurantPaymentMethodRepository = restaurantPaymentMethodRepository;
     }
 
     public Area execute(UpdateAreaPaymentMethodInput input) {
@@ -26,7 +26,7 @@ public class UpdateAreaPaymentMethodUseCase {
                                  .orElseThrow(() -> new AreaNotFoundException("Area not found with id " + input.getAreaId()));
 
         area.addOrUpdatePaymentMethod(input.getPaymentMethod());
-        paymentMethodRepository.update(input.getAreaId(), input.getPaymentMethod());
+        restaurantPaymentMethodRepository.updateByAreaId(input.getAreaId(), input.getPaymentMethod());
 
         return areaRepository.save(area);
     }

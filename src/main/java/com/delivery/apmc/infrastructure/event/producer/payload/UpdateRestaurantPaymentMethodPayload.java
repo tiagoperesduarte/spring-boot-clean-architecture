@@ -15,15 +15,15 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public class UpdateAreaPaymentMethodPayload implements Serializable {
-    private String areaId;
+public class UpdateRestaurantPaymentMethodPayload implements Serializable {
+    private String restaurantId;
     private PaymentMethodType type;
     private Boolean status;
     private PaymentMethodReason reason;
 
-    public static UpdateAreaPaymentMethodPayload of(String areaId, PaymentMethod paymentMethod) {
-        return new UpdateAreaPaymentMethodPayload(
-                areaId,
+    public static UpdateRestaurantPaymentMethodPayload of(String restaurantId, PaymentMethod paymentMethod) {
+        return new UpdateRestaurantPaymentMethodPayload(
+                restaurantId,
                 paymentMethod.getType(),
                 paymentMethod.isStatus(),
                 paymentMethod.getReason()

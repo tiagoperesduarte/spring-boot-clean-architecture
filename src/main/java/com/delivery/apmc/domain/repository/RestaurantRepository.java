@@ -9,6 +9,8 @@ import com.delivery.apmc.domain.entity.SimplePageRequest;
 public interface RestaurantRepository {
     SimplePage<Restaurant> findAll(SimplePageRequest simplePageRequest);
 
+    SimplePage<Restaurant> findAllByAreaId(String areaId, SimplePageRequest simplePageRequest);
+
     Optional<Restaurant> findById(String id);
 
     Restaurant save(Restaurant restaurant);
