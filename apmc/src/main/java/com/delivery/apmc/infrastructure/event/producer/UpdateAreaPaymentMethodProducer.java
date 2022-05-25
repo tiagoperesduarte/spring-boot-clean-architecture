@@ -15,7 +15,7 @@ public class UpdateAreaPaymentMethodProducer implements KafkaProducer<UpdateArea
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    @Value("${app.apmcc.area-payment-method-update.topic}")
+    @Value("${app.rpmc.area-payment-method-update.topic}")
     private String topic;
 
     @Override
