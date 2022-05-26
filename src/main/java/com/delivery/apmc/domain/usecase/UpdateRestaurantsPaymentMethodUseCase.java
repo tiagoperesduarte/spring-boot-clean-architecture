@@ -15,15 +15,18 @@ import com.delivery.apmc.domain.usecase.input.UpdateRestaurantsPaymentMethodInpu
 @Service
 public class UpdateRestaurantsPaymentMethodUseCase {
     private final int batchSize;
+    private final String updateType;
     private final RestaurantRepository restaurantRepository;
     private final RestaurantPaymentMethodRepository restaurantPaymentMethodRepository;
 
     public UpdateRestaurantsPaymentMethodUseCase(
             @Value("${app.restaurants-payment-method.batch.size}") int batchSize,
+            @Value("${app.restaurants-payment-method.update.type}") String updateType,
             RestaurantRepository restaurantRepository,
             RestaurantPaymentMethodRepository restaurantPaymentMethodRepository
     ) {
         this.batchSize = batchSize;
+        this.updateType = updateType;
         this.restaurantRepository = restaurantRepository;
         this.restaurantPaymentMethodRepository = restaurantPaymentMethodRepository;
     }
@@ -40,7 +43,7 @@ public class UpdateRestaurantsPaymentMethodUseCase {
             );
 
             if (pageRestaurants.getContent().size() > 0) {
-                updateOneByOne(pageRestaurants.getContent(), input.getPaymentMethod());
+                updateRestaurants(pageRestaurants.getContent(), input.getPaymentMethod());
                 currentPage++;
             } else {
                 hasNextPage = false;
@@ -48,14 +51,22 @@ public class UpdateRestaurantsPaymentMethodUseCase {
         }
     }
 
-    private void updateOneByOne(List<Restaurant> restaurants, PaymentMethod paymentMethod) {
-        restaurants.forEach(restaurant -> restaurantPaymentMethodRepository.updateByRestaurantId(
-                restaurant.getId(),
+    private void updateRestaurants(List<Restaurant> restaurants, PaymentMethod paymentMethod) {
+        if (updateType.equalsIgnoreCase("single")) {
+            updateRestaurantsOneByOne(restaurants, paymentMethod);
+        } else {
+            updateRestaurantsInBatch(restaurants, paymentMethod);
+        }
+    }
+
+    private void updateRestaurantsOneByOne(List<Restaurant> restaurants, PaymentMethod paymentMethod) {
+        restaurants.forEach(restaurant -> restaurantPaymentMethodRepository.updateByRestaurantIds(
+                List.of(restaurant.getId()),
                 paymentMethod
         ));
     }
 
-    private void updateInBatch(List<Restaurant> restaurants, PaymentMethod paymentMethod) {
+    private void updateRestaurantsInBatch(List<Restaurant> restaurants, PaymentMethod paymentMethod) {
         var restaurantIds = restaurants.stream()
                                        .map(Restaurant::getId)
                                        .toList();
