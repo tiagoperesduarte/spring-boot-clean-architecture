@@ -2,4 +2,4 @@
 An example of clean architecture implementation with Spring Boot, MongoDB, Kafka and Docker
 
 # Architecture
-<img src="screenshots/architecture.jpg" width="320">
+<img src="screenshots/architecture.jpg">
