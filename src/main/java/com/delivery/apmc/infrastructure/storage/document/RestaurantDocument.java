@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.delivery.apmc.core.utils.CollectionUtils;
@@ -21,7 +22,10 @@ public class RestaurantDocument {
     private String id;
 
     private String name;
+
+    @Indexed
     private List<String> areaIds;
+
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 

@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.delivery.apmc.domain.usecase.CreateRestaurantUseCase;
 import com.delivery.apmc.domain.usecase.DeleteRestaurantUseCase;
+import com.delivery.apmc.domain.usecase.GenerateFakeRestaurantsUseCase;
 import com.delivery.apmc.domain.usecase.GetRestaurantUseCase;
 import com.delivery.apmc.domain.usecase.GetRestaurantsUseCase;
 import com.delivery.apmc.domain.usecase.input.GetRestaurantsInput;
 import com.delivery.apmc.infrastructure.api.request.CreateRestaurantRequest;
+import com.delivery.apmc.infrastructure.api.request.GenerateFakeRestaurantsRequest;
 import com.delivery.apmc.infrastructure.api.response.RestaurantResponse;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,17 +36,20 @@ public class RestaurantController {
     private final GetRestaurantUseCase getRestaurantUseCase;
     private final CreateRestaurantUseCase createRestaurantUseCase;
     private final DeleteRestaurantUseCase deleteRestaurantUseCase;
+    private final GenerateFakeRestaurantsUseCase generateFakeRestaurantsUseCase;
 
     public RestaurantController(
             GetRestaurantsUseCase getRestaurantsUseCase,
             GetRestaurantUseCase getRestaurantUseCase,
             CreateRestaurantUseCase createRestaurantUseCase,
-            DeleteRestaurantUseCase deleteRestaurantUseCase
+            DeleteRestaurantUseCase deleteRestaurantUseCase,
+            GenerateFakeRestaurantsUseCase generateFakeRestaurantsUseCase
     ) {
         this.getRestaurantsUseCase = getRestaurantsUseCase;
         this.getRestaurantUseCase = getRestaurantUseCase;
         this.createRestaurantUseCase = createRestaurantUseCase;
         this.deleteRestaurantUseCase = deleteRestaurantUseCase;
+        this.generateFakeRestaurantsUseCase = generateFakeRestaurantsUseCase;
     }
 
     @GetMapping(value = "/restaurants")
@@ -81,5 +86,13 @@ public class RestaurantController {
 
         deleteRestaurantUseCase.execute(restaurantId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping(value = "/restaurants/generate")
+    public ResponseEntity<?> generateFakeRestaurants(@Valid @RequestBody GenerateFakeRestaurantsRequest request) {
+        log.debug("Request to generate fake restaurants with data (data={})", request);
+
+        generateFakeRestaurantsUseCase.execute(request.toInput());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

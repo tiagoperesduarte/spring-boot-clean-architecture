@@ -35,7 +35,7 @@ public class UpdateRestaurantsPaymentMethodUseCase {
                     simplePageRequest
             );
 
-            if (pageRestaurants.getTotalElements() > 0) {
+            if (pageRestaurants.getContent().size() > 0) {
                 pageRestaurants.getContent()
                                .forEach(restaurant -> restaurantPaymentMethodRepository.updateByRestaurantId(
                                        restaurant.getId(),

@@ -1,5 +1,8 @@
 package com.delivery.apmc.infrastructure.event.consumer;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -29,7 +32,14 @@ public class UpdateRestaurantsPaymentMethodConsumer implements KafkaConsumer<Upd
         log.debug("Consuming event to update restaurants payment method with data (data={})", payload);
 
         try {
+            Instant start = Instant.now();
+
             updateRestaurantsPaymentMethodUseCase.execute(payload.toInput());
+
+            Instant finish = Instant.now();
+            long timeElapsed = Duration.between(start, finish).toSeconds();
+
+            log.debug("Event to update restaurants payment method with data (data={}) successfully finished in {} seconds duration.", payload, timeElapsed);
 
             ack.acknowledge();
         } catch (DomainException ex) {
