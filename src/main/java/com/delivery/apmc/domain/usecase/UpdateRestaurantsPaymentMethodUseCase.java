@@ -1,8 +1,12 @@
 package com.delivery.apmc.domain.usecase;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.delivery.apmc.domain.entity.PaymentMethod;
+import com.delivery.apmc.domain.entity.Restaurant;
 import com.delivery.apmc.domain.entity.SimplePageRequest;
 import com.delivery.apmc.domain.repository.RestaurantPaymentMethodRepository;
 import com.delivery.apmc.domain.repository.RestaurantRepository;
@@ -36,16 +40,26 @@ public class UpdateRestaurantsPaymentMethodUseCase {
             );
 
             if (pageRestaurants.getContent().size() > 0) {
-                pageRestaurants.getContent()
-                               .forEach(restaurant -> restaurantPaymentMethodRepository.updateByRestaurantId(
-                                       restaurant.getId(),
-                                       input.getPaymentMethod()
-                               ));
-
+                updateOneByOne(pageRestaurants.getContent(), input.getPaymentMethod());
                 currentPage++;
             } else {
                 hasNextPage = false;
             }
         }
+    }
+
+    private void updateOneByOne(List<Restaurant> restaurants, PaymentMethod paymentMethod) {
+        restaurants.forEach(restaurant -> restaurantPaymentMethodRepository.updateByRestaurantId(
+                restaurant.getId(),
+                paymentMethod
+        ));
+    }
+
+    private void updateInBatch(List<Restaurant> restaurants, PaymentMethod paymentMethod) {
+        var restaurantIds = restaurants.stream()
+                                       .map(Restaurant::getId)
+                                       .toList();
+
+        restaurantPaymentMethodRepository.updateByRestaurantIds(restaurantIds, paymentMethod);
     }
 }
