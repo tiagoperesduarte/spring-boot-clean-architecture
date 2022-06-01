@@ -32,7 +32,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     @Override
     public SimplePage<Restaurant> findAllByAreaId(String areaId, SimplePageRequest simplePageRequest) {
         var pageRequest = PageRequest.of(simplePageRequest.getPage(), simplePageRequest.getSize());
-        var page = restaurantMongoRepository.findAllByAreaIds(areaId, pageRequest)
+        var page = restaurantMongoRepository.findAllByAreaIdsOrderByCreatedOnAsc(areaId, pageRequest)
                                             .map(RestaurantDocument::toEntity);
 
         return new SimplePage<>(page.getContent(), page.getTotalElements());

@@ -50,6 +50,8 @@ public class AreaDocument {
                            .name(area.getName())
                            .type(area.getType())
                            .paymentMethods(paymentMethodDocuments)
+                           .createdOn(LocalDateTime.now())
+                           .updatedOn(LocalDateTime.now())
                            .build();
     }
 
